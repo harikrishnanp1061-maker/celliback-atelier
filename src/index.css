@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #FAF4ED;
+  --color-canvas-light: #FDF9F5;
+  --color-sand: #ECE5DC;
+  --color-clay: #DFD5C6;
+  --color-ceramic: #FFFDF9;
+  --color-petal-pink: #FDECEF;
+  --color-blush-soft: #F7D6DB;
+  --color-rose-silk: #E88998;
+  --color-matte-rose: #C86D7A;
+  --color-matte-rose-hover: #B45B68;
+  --color-matte-rose-subtle: #F5E6E8;
+  --color-ink: #1F1A1B;
+  --color-ink-muted: #5C5455;
+  --color-ink-subtle: #8A8182;
+  --color-warm-border: #E8DDD2;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --animate-float-slow: floatSlow 6s ease-in-out infinite;
+  --animate-float-rev: floatRev 7s ease-in-out infinite;
+  --animate-rise: riseUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-ribbon-wave: ribbonWave 8s ease-in-out infinite alternate;
+
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(0.8deg); }
+  }
+
+  @keyframes floatRev {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(5px) rotate(-0.8deg); }
+  }
+
+  @keyframes riseUp {
+    0% { transform: translateY(32px); opacity: 0; }
+    100% { transform: translateY(0px); opacity: 1; }
+  }
+
+  @keyframes ribbonWave {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 40; }
+  }
+}
+
+:root {
+  color-scheme: light;
+  --background: #FAF4ED;
+  --foreground: #1F1A1B;
+  --card: #FFFDF9;
+  --card-foreground: #1F1A1B;
+  --popover: #FFFDF9;
+  --popover-foreground: #1F1A1B;
+  --primary: #C86D7A;
+  --primary-foreground: #FFFDF9;
+  --secondary: #FDECEF;
+  --secondary-foreground: #5C5455;
+  --muted: #ECE5DC;
+  --muted-foreground: #8A8182;
+  --accent: #E88998;
+  --accent-foreground: #1F1A1B;
+  --destructive: #E11D48;
+  --destructive-foreground: #FFFDF9;
+  --border: #E8DDD2;
+  --input: #E8DDD2;
+  --ring: #C86D7A;
+  --radius: 1rem;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: #FAF4ED;
+}
+
+/* Mobile Touch & Tap Responsiveness */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* Hardware-accelerated noise texture rendered once on a fixed compositor layer to eliminate scroll lag */
+body {
+  background-color: #FAF4ED;
+  color: #1F1A1B;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  transform: translateZ(0);
+}
+
+::selection {
+  background-color: #F7D6DB;
+  color: #1F1A1B;
+}
+
+/* Delete side scrollbar completely across all browsers */
+html, body {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Matte Ceramic Panel Surface with rich multi-layered blurred depth shadow */
+.ceramic-panel {
+  background: #FFFDF9;
+  border: 1px solid #E8DDD2;
+  box-shadow:
+    0 12px 32px -8px rgba(31, 26, 27, 0.09),
+    0 4px 14px -2px rgba(31, 26, 27, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ceramic-panel:hover {
+  box-shadow:
+    0 20px 42px -10px rgba(31, 26, 27, 0.13),
+    0 8px 22px -4px rgba(200, 109, 122, 0.16),
+    0 0 0 1px rgba(232, 137, 152, 0.35);
+}
+
+.ceramic-pill {
+  background: #FFFDF9;
+  border: 1px solid #E8DDD2;
+  box-shadow:
+    0 4px 12px -2px rgba(31, 26, 27, 0.08),
+    0 1px 3px 0 rgba(31, 26, 27, 0.04);
+}
+
+/* Tactile Inner Display Well (recessed luxury museum tray with blurred depth shadow) */
+.inner-case-well {
+  background: linear-gradient(155deg, rgba(236, 229, 220, 0.70) 0%, rgba(245, 240, 234, 0.85) 100%);
+  border: 1px solid rgba(232, 221, 210, 0.95);
+  box-shadow:
+    inset 0 4px 14px 0 rgba(31, 26, 27, 0.10),
+    inset 0 1px 4px 0 rgba(31, 26, 27, 0.06),
+    0 2px 8px 0 rgba(255, 255, 255, 0.85),
+    0 4px 12px -2px rgba(31, 26, 27, 0.04);
+}
+
+/* General Inner Panel with blurred depth shadow */
+.inner-panel-depth {
+  box-shadow:
+    inset 0 3px 12px 0 rgba(31, 26, 27, 0.09),
+    inset 0 1px 4px 0 rgba(31, 26, 27, 0.05),
+    0 2px 6px 0 rgba(255, 255, 255, 0.7);
+}
+
+.matte-shadow {
+  box-shadow:
+    0 20px 48px -12px rgba(45, 35, 38, 0.16),
+    0 6px 18px -4px rgba(31, 26, 27, 0.08),
+    0 0 0 1px rgba(232, 221, 210, 0.8);
+}
+
+/* Section Texture Backgrounds */
+.texture-pinstripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(200, 109, 122, 0.03) 0px,
+    rgba(200, 109, 122, 0.03) 2px,
+    transparent 2px,
+    transparent 14px
+  );
+}
+
+.texture-dots {
+  background-image: radial-gradient(rgba(200, 109, 122, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.texture-ribbon-weave {
+  background-image: 
+    linear-gradient(45deg, rgba(232, 137, 152, 0.04) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(232, 137, 152, 0.04) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(232, 137, 152, 0.04) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(232, 137, 152, 0.04) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
